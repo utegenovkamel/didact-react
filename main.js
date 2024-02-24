@@ -2,6 +2,23 @@ const container = document.getElementById('root')
 
 const Didact = {
   createElement,
+  render,
+}
+
+function render(element, container) {
+  const dom = element.type === 'TEXT_ELEMENT' ?
+      document.createTextNode() :
+      document.createElement(element.type);
+
+  Object.keys(element.props)
+    .filter(property => property !== 'children')
+    .forEach(property => dom[property] = element.props[property])
+
+  for (const child of element.props.children) {
+    render(child, dom)
+  }
+
+  container.appendChild(dom)
 }
 
 function createElement(type, props, ...children) {
