@@ -1,5 +1,3 @@
-const container = document.getElementById('root')
-
 const Didact = {
   createElement,
   render,
@@ -7,8 +5,8 @@ const Didact = {
 
 function render(element, container) {
   const dom = element.type === 'TEXT_ELEMENT' ?
-      document.createTextNode() :
-      document.createElement(element.type);
+    document.createTextNode('') :
+    document.createElement(element.type);
 
   Object.keys(element.props)
     .filter(property => property !== 'children')
@@ -51,7 +49,7 @@ const element = Didact.createElement(
   Didact.createElement("a", null, "bar"),
   Didact.createElement("b")
 )
-
+// result of createElement()
 const result = {
   type: 'div',
   props: {
@@ -80,11 +78,7 @@ const result = {
     ]
   }
 }
-console.log('element',element)
-console.log('a',result)
-const elStr = JSON.stringify(element)
-const resultStr = JSON.stringify(result)
-console.log(elStr === resultStr)
-console.log('element',elStr)
-console.log('------')
-console.log('result', resultStr)
+
+const container = document.getElementById("root")
+Didact.render(element, container)
+
